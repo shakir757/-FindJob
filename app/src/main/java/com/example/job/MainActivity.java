@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
         progB1 = findViewById(R.id.progressBar1);
         progB2 = findViewById(R.id.progressBar2);
         editTextSearch = findViewById(R.id.editTextSearch);
-
+        cl1 = findViewById(R.id.constraintLayout1);
+        cl2 = findViewById(R.id.constraintLayout2);
+        notFound = findViewById(R.id.constraintLayoutNotFound);
 
         title1 = findViewById(R.id.textViewTitle1);
         location1 = findViewById(R.id.textViewLocation1);
@@ -225,7 +227,8 @@ public class MainActivity extends AppCompatActivity {
             searchText = editTextSearch.getText().toString().trim();
 
             // Возможно реализовал что-то не правильно, поэтому приложение крашается
-            // По логике тут вроде все ок, но не сделано то, если никаких объявлений нет
+            // Если будет приходит ошибка, отображается то что ничего не найдено!
+
             Call<List<GetJobsList>> call = requests.getJobsSearch(searchText);
 
             call.enqueue(new Callback<List<GetJobsList>>() {
@@ -271,7 +274,9 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<GetJobsList>> call, Throwable t) {
-
+                    cl1.setVisibility(View.INVISIBLE);
+                    cl2.setVisibility(View.INVISIBLE);
+                    notFound.setVisibility(View.VISIBLE);
                 }
             });
         }
