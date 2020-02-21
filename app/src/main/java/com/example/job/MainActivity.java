@@ -175,7 +175,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void dialog(View view) {
-
+        String[] variants = {"None", "Full time", "Part Time"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Employment type")
+                /* .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You click yes!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You click no :(", Toast.LENGTH_SHORT).show();
+                    }
+                }) */
+                .setMultiChoiceItems(variants, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        Toast.makeText(MainActivity.this, "Шакир не умеет делать Progress Dialog", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
     }
 
 }

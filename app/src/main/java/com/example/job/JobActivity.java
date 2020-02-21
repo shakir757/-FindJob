@@ -40,7 +40,7 @@ public class JobActivity extends AppCompatActivity {
         title.setText(title1);
         location.setText(location1);
         description.setText(Html.fromHtml(description1));
-        date.setText(date1);
+        date.setText("Created date: " + date1);
         Glide.with(this).load(url1).into(image);
         }
 
@@ -54,7 +54,7 @@ public class JobActivity extends AppCompatActivity {
             title.setText(title1);
             location.setText(location1);
             description.setText(Html.fromHtml(description1));
-            date.setText(date1);
+            date.setText("Created date: " + date1);
             Glide.with(this).load(url1).into(image);
         }
     }
