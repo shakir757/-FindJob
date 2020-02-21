@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] test = {"text", "text1", "text2", "text3", "text4",
             "text5", "text6", "text7", "text8", "text9", "text10", "text11"};
 
+    TextWatcher textWatcher;
+
     TextView title1, location1, description1, error, title2, location2, description2;
     ImageView image1, image2;
     String img_url1, descriptionS1, img_url2, descriptionS2;
@@ -44,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
     int number;
 
     ProgressBar progB1, progB2;
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://jobs.github.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    final Requests requests = retrofit.create(Requests.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +94,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parceJobs() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jobs.github.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        final Requests requests = retrofit.create(Requests.class);
 
         Call<List<GetJobsList>> call = requests.getJobs();
 
@@ -135,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<GetJobsList>> call, Throwable t) {
-                error.setText("Error: " + t.getMessage());
+                Intent intent = new Intent(MainActivity.this, ErrorActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -172,4 +177,5 @@ public class MainActivity extends AppCompatActivity {
     public void dialog(View view) {
 
     }
+
 }

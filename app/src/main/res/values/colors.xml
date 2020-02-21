@@ -13,4 +13,6 @@
     <color name="colorApply">#5D8AF5</color>
     <color name="ColorHeart">#FA6D6D</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRetryButton">#575454</color>
+    <color name="colorRetryButtonBG">#D7D8DB</color>
 </resources>
